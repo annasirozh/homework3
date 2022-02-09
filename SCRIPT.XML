@@ -1,0 +1,23 @@
+CREATE TABLE Users (
+userId int(10) NOT NULL,
+name VARCHAR(50) NOT NULL,
+address VARCHAR(255),
+PRIMARY KEY (userId)
+);
+
+CREATE TABLE Accounts (
+accountId int(10) NOT NULL,
+userId int(10) NOT NULL,
+balance DECIMAL(15,2) CHECK (balance <= 2000000000 AND >=0),
+currency VARCHAR(10),
+PRIMARY KEY (accountId),
+FOREIGN KEY (userId) REFERENCES Users (userId)
+);
+
+CREATE TABLE Transactions (
+transactinId int(10) NOT NULL,
+accountId int(10) NOT NULL,
+amount DECIMAL(15,2) CHECK (amount <= 100000000),
+PRIMARY KEY (transactinId),
+FOREIGN KEY (accountId) REFERENCES Accounts (accountId)
+);
